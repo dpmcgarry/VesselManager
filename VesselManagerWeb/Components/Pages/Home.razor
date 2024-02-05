@@ -1,0 +1,17 @@
+﻿@page "/"
+@using Microsoft.Extensions.Configuration
+@using Microsoft.Extensions.Options
+@using libVesselManager
+@inject IOptions<MariaDBOptions> mariaAccessor
+
+<PageTitle>Home</PageTitle>
+
+<h1>Hello, world!</h1>
+
+Welcome to your new app.
+
+Configuration value for 'MariaDB': 
+@mariaAccessor.Value.Host
+@mariaAccessor.Value.Port
+@mariaAccessor.Value.User
+@mariaAccessor.Value.Password
