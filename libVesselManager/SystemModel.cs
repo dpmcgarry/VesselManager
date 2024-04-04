@@ -3,44 +3,44 @@ using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 namespace libVesselManager;
 
-[Index(nameof(RoomName), IsUnique = true)]
-public class Room : IEquatable<Room>
+[Index(nameof(SystemName), IsUnique = true)]
+public class System : IEquatable<System>
 {
     [Key]
-    public uint RoomId { get; set; }
+    public uint SystemId { get; set; }
     [Required]
     [Column(TypeName = "varchar(100)")]
-    public required string RoomName { get; set; }
+    public required string SystemName { get; set; }
 
     public override string ToString()
     {
-        return "ID: " + RoomId + "   Name: " + RoomName;
+        return "ID: " + SystemId + "   Name: " + SystemName;
     }
     public override bool Equals(object? obj)
     {
         if (obj == null) return false;
 
-        Room? objAsRoom = obj as Room;
-        if (objAsRoom is null) return false;
-        else return Equals(objAsRoom);
+        System? objAsSystem = obj as System;
+        if (objAsSystem is null) return false;
+        else return Equals(objAsSystem);
     }
     public override int GetHashCode()
     {
-        return (int)RoomId;
+        return (int)SystemId;
     }
-    public bool Equals(Room? other)
+    public bool Equals(System? other)
     {
         if (other is null) return false;
-        return (this.RoomId.Equals(other.RoomId) && this.RoomName.Equals(other.RoomName));
+        return (this.SystemId.Equals(other.SystemId) && this.SystemName.Equals(other.SystemName));
     }
 
-    public static bool operator ==(Room? a, Room? b)
+    public static bool operator ==(System? a, System? b)
     {
         if (a is null && b is null) return true;
         if (a is null) return false;
         return a.Equals(b);
     }
-    public static bool operator !=(Room? a, Room? b)
+    public static bool operator !=(System? a, System? b)
     {
         if (a is null && b is null) return true;
         if (a is null) return false;
