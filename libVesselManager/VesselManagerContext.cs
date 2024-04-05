@@ -12,9 +12,17 @@ public class VesselManagerContext : DbContext
     public DbSet<MaintainanceItem> MaintainanceItems { get; set; }
     public DbSet<Item> Items { get; set; }
 
+    public VesselManagerContext()
+    { }
+    public VesselManagerContext(DbContextOptions<VesselManagerContext> options) : base(options)
+    { }
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseMySql(ConnectionString, ServerVersion.AutoDetect(ConnectionString));
+        // This is CRITICAL to not mess up DI in the API but allow the Console to work
+        if (!optionsBuilder.IsConfigured)
+        {
+            optionsBuilder.UseMySql(ConnectionString, ServerVersion.AutoDetect(ConnectionString));
+        }
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
